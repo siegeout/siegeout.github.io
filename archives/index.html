@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Siegen&#39;s blog">
-    <title>Archives - Siegen&#39;s blog</title>
+    <title>Archive - Siegen&#39;s blog</title>
     <meta name="author" content="Siegen">
     
     
@@ -56,7 +56,7 @@
                 href="#about">
         
         
-            <img class="header-picture" src="/assets/images/avatar.jpg" alt="Author&#39;s picture"/>
+            <img class="header-picture" src="/assets/images/avatar.jpg" alt="Photo de l&#39;auteur"/>
         
         </a>
     
@@ -74,7 +74,7 @@
         
             <div class="sidebar-profile">
                 <a href="/#about">
-                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg" alt="Author&#39;s picture"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg" alt="Photo de l&#39;auteur"/>
                 </a>
                 <h4 class="sidebar-profile-name">Siegen</h4>
                 
@@ -206,7 +206,7 @@
                 <div class="postShorten-meta">
     <time itemprop="datePublished" datetime="2016-08-02T18:14:03+08:00">
 	
-		    8月 02, 2016
+		    02 8月 2016
     	
     </time>
     
@@ -311,10 +311,27 @@ android:startDelay=&quot;@integer/anim_duration_default&quot;&gt;
 </li>
 </ol>
 <p><pre><code><item name="android:windowSharedElementReturnTransition">@transition/detail_shared_element_return_transition</item></code></pre><br><img src="https://lh3.googleusercontent.com/Gk_zGc0f8ACkM8ezaJygsd-i_NZ5Ah8r1Jj_NvL5tHUQ1LQSgJfQmnstNHn53Xs64aU2J4E3o_DcoHUerriseez78YDkCoI7ALbTZzIfXSb60d3RrV0DUn4AY3WXFa2OtJQpDhp9" alt=""></p>
-<p>在这个transition中，我们使用和上面的detail_shared_element_enter_transition几乎相同的方法。不过对每部分添加了一些延时来配合UI上的效果。<br>```</p>
-<transitionset xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:duration="@integer/anim_duration_default" android:interpolator="@android:interpolator/accelerate_quad"><br><br>    // 1<br>    <transitionset><br>        <changebounds><br>        <changetransform><br>        <changeclipbounds><br>        <changeimagetransform><br>        <transition class="com.sample.andremion.musicplayer.transition.ProgressViewTransition" app:morph="1"><br>        <targets><br>            <target android:targetid="@id/progress"><br>        </target></targets><br>    </transition></changeimagetransform></changeclipbounds></changetransform></changebounds></transitionset>
+<p>在这个transition中，我们使用和上面的detail_shared_element_enter_transition几乎相同的方法。不过对每部分添加了一些延时来配合UI上的效果。</p>
+<pre><code>&lt;transitionSet xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+android:duration=&quot;@integer/anim_duration_default&quot;
+android:interpolator=&quot;@android:interpolator/accelerate_quad&quot;&gt;
 
-<pre><code>// 2
+// 1
+&lt;transitionSet&gt;
+    &lt;changeBounds /&gt;
+    &lt;changeTransform /&gt;
+    &lt;changeClipBounds /&gt;
+    &lt;changeImageTransform /&gt;
+    &lt;transition
+        class=&quot;com.sample.andremion.musicplayer.transition.ProgressViewTransition&quot;
+        app:morph=&quot;1&quot; /&gt;
+    &lt;targets&gt;
+        &lt;target android:targetId=&quot;@id/progress&quot; /&gt;
+    &lt;/targets&gt;
+&lt;/transitionSet&gt;
+
+// 2
 &lt;transitionSet android:startDelay=&quot;@integer/anim_duration_short&quot;&gt;
     &lt;changeBounds /&gt;
     &lt;changeTransform /&gt;
@@ -352,14 +369,14 @@ android:startDelay=&quot;@integer/anim_duration_default&quot;&gt;
 <p>你也可以在下面的链接阅读到更多关于Android上 meaningful motion的信息。</p>
 <p><a href="https://blog.prototypr.io/applying-meaningful-motion-on-android-a271a873bd78" target="_blank" rel="external">Applying meaningful motion on Android</a></p>
 <p>玩的愉快 ;)</p>
-</transitionset>
+
                     
                         
                     
                     
                         <p>
                             <a href="/2016/08/02/My-New-Post/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
+                                Commenter et partager
                             </a>
                         </p>
                     
@@ -373,7 +390,7 @@ android:startDelay=&quot;@integer/anim_duration_default&quot;&gt;
     <ul class="pagination">
         
         
-        <li class="pagination-number">page 1 of 1</li>
+        <li class="pagination-number">page sur</li>
     </ul>
 </div>
 
@@ -403,7 +420,7 @@ android:startDelay=&quot;@integer/anim_duration_default&quot;&gt;
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/avatar.jpg" alt="Author&#39;s picture"/>
+            <img id="about-card-picture" src="/assets/images/avatar.jpg" alt="Photo de l&#39;auteur"/>
         
             <h4 id="about-card-name">Siegen</h4>
         
@@ -438,7 +455,7 @@ android:startDelay=&quot;@integer/anim_duration_default&quot;&gt;
             </form>
         </div>
         <div class="modal-body">
-            <div class="no-result text-color-light text-center">no post found</div>
+            <div class="no-result text-color-light text-center">aucun article trouvé</div>
             <div class="results">
                 
                 <div class="media">
@@ -464,10 +481,10 @@ android:startDelay=&quot;@integer/anim_duration_default&quot;&gt;
         </div>
         <div class="modal-footer">
             <p class="results-count text-medium"
-                data-message-zero="no post found"
-                data-message-one="1 post found"
-                data-message-other="{n} posts found">
-                1 post found
+                data-message-zero="aucun article trouvé"
+                data-message-one="1 article trouvé"
+                data-message-other="{n} articles trouvés">
+                1 article trouvé
             </p>
         </div>
     </div>
