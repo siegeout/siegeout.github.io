@@ -204,7 +204,7 @@
     <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -226,171 +226,23 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
+                <div class="postShorten-excerpt" itemprop="articleBody">
                     <ul>
-<li><p>原文链接 : <a href="https://stories.uplabs.com/music-player-3a85864d6df7#.8cso9al4h" target="_blank" rel="external">Music Player: From UI Proposal to Code</a>（需科学上网）</p>
+<li><p>原文链接 : <a href="https://stories.uplabs.com/music-player-3a85864d6df7#.8cso9al4h">Music Player: From UI Proposal to Code</a>（需科学上网）</p>
 </li>
-<li><p>原文作者 : <a href="https://stories.uplabs.com/@andremion" target="_blank" rel="external">André Mion</a></p>
+<li><p>原文作者 : <a href="https://stories.uplabs.com/@andremion">André Mion</a></p>
 </li>
-<li><p>译者 :         <a href="http://www.jianshu.com/users/54a01d734ca0" target="_blank" rel="external">Siegen</a></p>
+<li><p>译者 :         <a href="http://www.jianshu.com/users/54a01d734ca0">Siegen</a></p>
 </li>
 </ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/703392-be9a7bc46faa3417.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="从简书搬过来">（译者注：这是github最近很火的一个<a href="https://github.com/andremion/Music-Player" target="_blank" rel="external">项目</a>，目前star人数1800 。在原作者的帮助与支持之下，完成了这篇译文，希望对大家能有所帮助。）</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/703392-be9a7bc46faa3417.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="从简书搬过来">（译者注：这是github最近很火的一个<a href="https://github.com/andremion/Music-Player">项目</a>，目前star人数1800 。在原作者的帮助与支持之下，完成了这篇译文，希望对大家能有所帮助。）</p>
 <p>一些开发者在遇到稍显复杂的UI方案时,会觉得很难编码实现。他们中的许多人会在写代码的时候跳过重要的UI或者动画，这导致最终的效果和原始方案相差甚远。</p>
-<p>本文主要谈论的是针对一个UI方案如何编码的过程，在这个过程中跳过了一些基本的Android细节，主要聚焦于UI的过渡和动画上。</p>
-<h1 id="MaterialUp"><a href="#MaterialUp" class="headerlink" title=" MaterialUp"></a><strong><em> <a href="http://www.materialup.com/" target="_blank" rel="external">MaterialUp</a></em></strong></h1><p>这是一个很棒的网站，设计师与开发者能够在这里找到和分享用于构建Material Design网站或app的资源。这里有许多用户界面设计，有趣的试验，开源app，库以及一些在Android，Web或者iOS上都很好用的产品。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/703392-e1e79108acbf2aa5.gif?imageMogr2/auto-orient/strip" alt="[Music Player](https://dribbble.com/shots/1850527-Music-Player-Transition) transition by [Anish Chandran](https://dribbble.com/anish_chandran)"></p>
-<p>浏览这个网站你可以找到这个由<a href="https://dribbble.com/anish_chandran" target="_blank" rel="external">Anish Chandran</a>创建的名为 <a href="https://dribbble.com/shots/1850527-Music-Player-Transition" target="_blank" rel="external">Music Player</a> 的用户界面资源。</p>
-<p>这个设计方案给了我们一个好例子，它展示了一个音乐播放应用该如何以流畅和连续的方式运用Material和Motion 设计。</p>
-<h1 id="热身"><a href="#热身" class="headerlink" title="热身"></a><strong><em>热身</em></strong></h1><p>首先，我们需要做一些准备工作。</p>
-<h4 id="a-把动态方案分解成帧"><a href="#a-把动态方案分解成帧" class="headerlink" title="a. 把动态方案分解成帧"></a>a. 把动态方案分解成帧</h4><p>把动态方案文件转换成一个个单独的帧。这可以帮助我们查看动画与过渡的每一个步骤。</p>
-<h4 id="b-按类型分解"><a href="#b-按类型分解" class="headerlink" title="b. 按类型分解"></a>b. 按类型分解</h4><p>我们有许多的视图都会有动画与过渡同时进行的情况，同时去思考这些内容，会让写代码变得非常的困难。我们可以把这些过渡与动画按照类型分解，比如：view滑动到底部，view淡出，view过渡到新的Activity，等等。</p>
-<p>不管有没有动画，接下来的这个建议都值得在每一个布局中采用。</p>
-<h4 id="c-简化你的视图结构"><a href="#c-简化你的视图结构" class="headerlink" title="c. 简化你的视图结构"></a>c. 简化你的视图结构</h4><p>创建一个尽可能简单的视图结构，避免在同一个布局里使用过多的容器ViewGroup。这样可以使过渡动画的设计变得简单，使得维护起来更加方便，而且这样做会大幅度的提高应用在动画过程中的运行性能。</p>
-<h1 id="魔法是怎样发生的"><a href="#魔法是怎样发生的" class="headerlink" title="魔法是怎样发生的"></a><strong><em>魔法是怎样发生的</em></strong></h1><p>在布局文件中，一些ViewGroup已经把 android:transitionGroup属性设置为true，这样可以让ViewGroup在Activity Transition期间被作为一个整体对待。比如这里的播放列表容器(main layout file)和控制按钮容器(detail layout file)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;RelativeLayout</div><div class="line">   android:id=&quot;@+id/playlist&quot;</div><div class="line">   android:layout_width=&quot;match_parent&quot;</div><div class="line">   android:layout_height=&quot;wrap_content&quot;</div><div class="line">   android:layout_below=&quot;@id/cover&quot;</div><div class="line">   android:gravity=&quot;center_vertical&quot;</div><div class="line">   android:padding=&quot;@dimen/activity_vertical_margin&quot;</div><div class="line">   android:transitionGroup=&quot;true&quot;&gt;</div><div class="line">   …</div><div class="line">&lt;LinearLayout</div><div class="line">   android:id=&quot;@+id/controls&quot;</div><div class="line">   android:layout_width=&quot;match_parent&quot;</div><div class="line">   android:layout_height=&quot;wrap_content&quot;</div><div class="line">   android:layout_alignParentBottom=&quot;true&quot;</div><div class="line">   android:gravity=&quot;center_horizontal&quot;</div><div class="line">   android:transitionGroup=&quot;true&quot;</div><div class="line">   app:layout_marginBottomPercent=&quot;5%&quot;&gt;</div><div class="line">   …</div></pre></td></tr></table></figure>
-<p> 在styles.xml 中有我们在 MainActivity 和Detail Activity里面使用的主题.</p>
-<ul>
-<li><p>AppTheme.Main</p>
-<pre><code>&lt;item name=&quot;android:windowSharedElementsUseOverlay&quot;&gt;false&lt;/item&gt;
-</code></pre></li>
-</ul>
-<p>禁用共享元素视图的overlay。在 Music Player的布局中我们需要在shared element view从Main Activity到Detail Activity移动的时候禁用overlay。如果它是启用的，某些共享元素视图可能会以错误的方式覆盖到其它view上。</p>
-<p><pre><code><item name="android:windowExitTransition">@transition/list_content_exit_transition</item></code></pre></p>
-<p><item name="android:windowReenterTransition">@transition/list_content_reenter_transition</item><br>   </p>
-<p><img src="https://lh5.googleusercontent.com/bs5xc2qMdYl7u1hN7NpMae4SCns8jQ0bCHN8bjgqWDCcpltw7hnKllnae4ZVapy248x1t0qQJrimR1dMEFhlHSVUA-kdSDER4CThsqOAJsshmbWIvkg-CL4vcCpvwPR6VqPExT5E" alt=""></p>
-<p>列表内容的退出和进入具有相同的过渡方式。</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;transitionSet xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:duration=&quot;@integer/anim_duration_default&quot;
-
-// 1
-android:startDelay=&quot;@integer/anim_duration_default&quot;&gt;
-
-// 2
-&lt;fade&gt;
-    &lt;targets&gt;
-        &lt;target android:targetId=&quot;@id/pane&quot; /&gt;
-    &lt;/targets&gt;
-&lt;/fade&gt;
-
-// 3
-&lt;slide android:slideEdge=&quot;bottom&quot;&gt;
-    &lt;targets&gt;
-        &lt;target android:excludeId=&quot;@android:id/statusBarBackground&quot; /&gt;
-        &lt;target android:excludeId=&quot;@id/pane&quot; /&gt;
-        &lt;target android:excludeId=&quot;@android:id/navigationBarBackground&quot; /&gt;
-    &lt;/targets&gt;
-&lt;/slide&gt;
-
-&lt;/transitionSet&gt;  
-</code></pre><ol>
-<li><p>设置一个延迟让这些过渡和FAB的渐变动画保持同步。</p>
-</li>
-<li><p>通过targetId属性指定的pane视图淡出或者淡入。</p>
-</li>
-<li><p>把RecyclerView和播放列表滑倒底部，并使用excludeId属性把状态栏，pane以及navigation bar 排除在外。</p>
-</li>
-</ol>
-<p><pre><code><item name="android:windowSharedElementExitTransition">@transition/list_shared_element_exit_transition</item></code></pre></p>
-<p><item name="android:windowSharedElementReenterTransition">@transition/list_shared_element_reenter_transition</item></p>
-<p><img src="https://lh6.googleusercontent.com/qvzqNccKcVP1rkIZrhcTbS4t8e2vMGlFixh9lwNIKFjI40mRsGCjw31V5xxCTUnQ0wyrmiG592dyW3L1IdcVYxIQ-Txr94G6EjEb12HkhC-rZgM4BwD-iAWOfbwOitJgoWL6m-ea" alt=""></p>
-<p>播放按钮退出和重新进入的transition方法几乎相同。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;transitionSet xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</div><div class="line">    android:duration=&quot;@integer/anim_duration_default&quot;&gt;</div><div class="line"></div><div class="line">    // 1</div><div class="line">    &lt;transition</div><div class="line">        class=&quot;com.sample.andremion.musicplayer.transition.PlayButtonTransition&quot;</div><div class="line">        app:mode=&quot;play|pause&quot; /&gt;</div><div class="line"></div><div class="line">&lt;/transitionSet&gt;</div></pre></td></tr></table></figure>
-<p>1.<a href="https://github.com/andremion/Music-Player/blob/master/app/src/main/java/com/sample/andremion/musicplayer/transition/PlayButtonTransition.java" target="_blank" rel="external">PlayButtonTransition</a> 是一个自定义的transition，它封装了一个<a href="https://github.com/andremion/Android-Animated-Icons" target="_blank" rel="external">AnimatedVectorDrawable</a> 来把播放按钮变为暂停或者反过来操作，这取决于mode的值。</p>
-<ul>
-<li>AppTheme.Detail</li>
-</ul>
-<p><pre><code><item name="android:windowEnterTransition">@transition/detail_content_enter_transition</item></code></pre></p>
-<p><item name="android:windowReturnTransition">@transition/detail_content_return_transition</item><br><br><img src="https://lh4.googleusercontent.com/rfmnoIfP4-vJ_I-yb1Jonbb3L1DZ4OLLuf6HwyUgXFHzgdK8h_Ius1rQImaJaEKZ-WXjfIAsfWKr-ilxDK_hyWCIVqXchLWuECCbN66GnEBBgfu7WhrIXskE0a1rAyL-YYa96U7V" alt=""></p>
-<p>详情内容页的进入和返回具有相同的transition方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;transitionSet xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:duration=&quot;@integer/anim_duration_default&quot;&gt;</div><div class="line"></div><div class="line">    // 1</div><div class="line">    &lt;fade&gt;</div><div class="line">        &lt;targets&gt;</div><div class="line">            &lt;target android:targetId=&quot;@id/ordering&quot; /&gt;</div><div class="line">        &lt;/targets&gt;</div><div class="line">    &lt;/fade&gt;</div><div class="line">    </div><div class="line">    // 2</div><div class="line">    &lt;slide android:slideEdge=&quot;bottom&quot;&gt;</div><div class="line">        &lt;targets&gt;</div><div class="line">            &lt;target android:targetId=&quot;@id/controls&quot; /&gt;</div><div class="line">        &lt;/targets&gt;</div><div class="line">    &lt;/slide&gt;</div><div class="line"></div><div class="line">&lt;/transitionSet&gt;</div></pre></td></tr></table></figure>
-<ol>
-<li><p>播放按钮容器按targetId属性指定的顺序淡出。</p>
-</li>
-<li><p>通过targetId属性指定，控制按钮容器滑到底部。</p>
-</li>
-</ol>
-<p><img src="https://lh4.googleusercontent.com/oMxXGW0sLYjQWMYUfqFMUiArb_JaJGhuwRwJkNU9fARY3zJrJ9dm-5YaCbBO7LeiNVj6ECM1iLiFFC_tWj2QE_LjqPLGKRYfnq0Y6_DhHLXXtqjzHJwD4cY74L8pVjnsOLXKU8r_" alt=""></p>
-<ol>
-<li><p>为transition的变化率定义一个interpolator，可以是非线性的。</p>
-</li>
-<li><p><a href="https://github.com/andremion/Music-Player/blob/master/app/src/main/java/com/sample/andremion/musicplayer/transition/ProgressViewTransition.java" target="_blank" rel="external">ProgressViewTransition</a>是一个自定义的transition，使用<a href="https://github.com/andremion/Music-Player/blob/master/app/src/main/java/com/sample/andremion/musicplayer/view/ProgressView.java" target="_blank" rel="external">ProgressView</a> 来实现从水平进度到弧形进度的变换。</p>
-</li>
-<li><p><a href="https://github.com/andremion/Music-Player/blob/master/app/src/main/java/com/sample/andremion/musicplayer/transition/CoverViewTransition.java" target="_blank" rel="external">CoverViewTransition</a> 是另一个自定义的transition，使用<a href="https://github.com/andremion/Music-Player/blob/master/app/src/main/java/com/sample/andremion/musicplayer/view/CoverView.java" target="_blank" rel="external">CoverView</a> 实现方形封面到圆形轨道线封面的变换。</p>
-</li>
-<li><p>对其他的共享元素使用默认的transition。</p>
-</li>
-</ol>
-<p><pre><code><item name="android:windowSharedElementReturnTransition">@transition/detail_shared_element_return_transition</item></code></pre><br><img src="https://lh3.googleusercontent.com/Gk_zGc0f8ACkM8ezaJygsd-i_NZ5Ah8r1Jj_NvL5tHUQ1LQSgJfQmnstNHn53Xs64aU2J4E3o_DcoHUerriseez78YDkCoI7ALbTZzIfXSb60d3RrV0DUn4AY3WXFa2OtJQpDhp9" alt=""></p>
-<p>在这个transition中，我们使用和上面的detail_shared_element_enter_transition几乎相同的方法。不过对每部分添加了一些延时来配合UI上的效果。</p>
-<pre><code>&lt;transitionSet xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-android:duration=&quot;@integer/anim_duration_default&quot;
-android:interpolator=&quot;@android:interpolator/accelerate_quad&quot;&gt;
-
-// 1
-&lt;transitionSet&gt;
-    &lt;changeBounds /&gt;
-    &lt;changeTransform /&gt;
-    &lt;changeClipBounds /&gt;
-    &lt;changeImageTransform /&gt;
-    &lt;transition
-        class=&quot;com.sample.andremion.musicplayer.transition.ProgressViewTransition&quot;
-        app:morph=&quot;1&quot; /&gt;
-    &lt;targets&gt;
-        &lt;target android:targetId=&quot;@id/progress&quot; /&gt;
-    &lt;/targets&gt;
-&lt;/transitionSet&gt;
-
-// 2
-&lt;transitionSet android:startDelay=&quot;@integer/anim_duration_short&quot;&gt;
-    &lt;changeBounds /&gt;
-    &lt;changeTransform /&gt;
-    &lt;changeClipBounds /&gt;
-    &lt;changeImageTransform /&gt;
-    &lt;transition
-        class=&quot;com.sample.andremion.musicplayer.transition.CoverViewTransition&quot;
-        app:shape=&quot;circle&quot; /&gt;
-    &lt;targets&gt;
-        &lt;target android:targetId=&quot;@id/cover&quot; /&gt;
-    &lt;/targets&gt;
-&lt;/transitionSet&gt;
-
-// 3
-&lt;transitionSet android:startDelay=&quot;@integer/anim_duration_default&quot;&gt;
-    &lt;changeBounds /&gt;
-    &lt;changeTransform /&gt;
-    &lt;changeClipBounds /&gt;
-    &lt;changeImageTransform /&gt;
-&lt;/transitionSet&gt;
-
-&lt;/transitionSet&gt;
-</code></pre><ol>
-<li><p>使用相反的“变换”模式，从弧形进度到水平进度。</p>
-</li>
-<li><p>使用相反的“变换”模式，从圆形封面到方形封面。</p>
-</li>
-<li><p>对其他的共享元素使用默认的transition。</p>
-</li>
-</ol>
-<h2 id="最终结果"><a href="#最终结果" class="headerlink" title="最终结果"></a>最终结果</h2><p><img src="https://lh4.googleusercontent.com/kECd5Aw-Cr8ZllQaKX9wJf3TZTd5DmDArmBkFVpBbXtT9D4mGXgZlsSjSYH91oibOi9hv51jJ9XbjsMfcOZi8Zwrz_5pRs52ybKTRjAvCtDUk-RZGDFaRLNUMDd7YZLS6WXxmO0e" alt="[Music Player](https://github.com/andremion/Music-Player) coded by [André Mion](https://github.com/andremion)
-"></p>
-<p>最终的结果应该是这样。当然，在最终的项目中可能会漏掉一些小细节，不过这都是小事情。</p>
-<p>完整的项目可以在<a href="https://github.com/andremion/Music-Player" target="_blank" rel="external">https://github.com/andremion/Music-Player </a>找到。</p>
-<p>你也可以在下面的链接阅读到更多关于Android上 meaningful motion的信息。</p>
-<p><a href="https://blog.prototypr.io/applying-meaningful-motion-on-android-a271a873bd78" target="_blank" rel="external">Applying meaningful motion on Android</a></p>
-<p>玩的愉快 ;)</p>
-
+<p>本文主要谈论的是针对一个UI方案如何编码的过程，在这个过程中跳过了一些基本的Android细节，主要聚焦于UI的过渡和动画上。<br>
                     
+                        <a href="/2016/08/02/My-New-Post/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2016/08/02/My-New-Post/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -483,7 +335,17 @@ android:interpolator=&quot;@android:interpolator/accelerate_quad&quot;&gt;
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><ul>
+<li><p>原文链接 : <a href="https://stories.uplabs.com/music-player-3a85864d6df7#.8cso9al4h">Music Player: From UI Proposal to Code</a>（需科学上网）</p>
+</li>
+<li><p>原文作者 : <a href="https://stories.uplabs.com/@andremion">André Mion</a></p>
+</li>
+<li><p>译者 :         <a href="http://www.jianshu.com/users/54a01d734ca0">Siegen</a></p>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/703392-be9a7bc46faa3417.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="从简书搬过来">（译者注：这是github最近很火的一个<a href="https://github.com/andremion/Music-Player">项目</a>，目前star人数1800 。在原作者的帮助与支持之下，完成了这篇译文，希望对大家能有所帮助。）</p>
+<p>一些开发者在遇到稍显复杂的UI方案时,会觉得很难编码实现。他们中的许多人会在写代码的时候跳过重要的UI或者动画，这导致最终的效果和原始方案相差甚远。</p>
+<p>本文主要谈论的是针对一个UI方案如何编码的过程，在这个过程中跳过了一些基本的Android细节，主要聚焦于UI的过渡和动画上。<br></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
