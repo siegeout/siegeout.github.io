@@ -6,54 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Siegen&#39;s blog">
-    <title>【译】Music Player:从UI方案到代码实现（Android） - Siegen&#39;s blog</title>
+    <title>标签: Android &lt;!-- more --&gt; - Siegen&#39;s blog</title>
     <meta name="author" content="Siegen">
     
     
     
-    <meta name="description" content="原文链接 : Music Player: From UI Proposal to Code（需科学上网）
-
-原文作者 : André Mion
-
-译者 :         Siegen
-
-
-（译者注：这是github最近很火的一个项目，目前star人数1800 。在原作者的帮助与支持之下，完成了这篇译文，希望对大家能有所帮助。）
-一些开发者在遇到稍显复杂的UI方案时,会觉得很难编码实现。他们中的">
+    <meta name="description" content="Wer spricht von Siegen？ Überstehn ist alles.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="【译】Music Player:从UI方案到代码实现（Android）">
-<meta property="og:url" content="http://yoursite.com/2016/08/02/My-New-Post/index.html">
+<meta property="og:title" content="Siegen's blog">
+<meta property="og:url" content="http://yoursite.com/tags/Android-more/index.html">
 <meta property="og:site_name" content="Siegen's blog">
-<meta property="og:description" content="原文链接 : Music Player: From UI Proposal to Code（需科学上网）
-
-原文作者 : André Mion
-
-译者 :         Siegen
-
-
-（译者注：这是github最近很火的一个项目，目前star人数1800 。在原作者的帮助与支持之下，完成了这篇译文，希望对大家能有所帮助。）
-一些开发者在遇到稍显复杂的UI方案时,会觉得很难编码实现。他们中的">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/703392-be9a7bc46faa3417.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/703392-e1e79108acbf2aa5.gif?imageMogr2/auto-orient/strip">
-<meta property="og:image" content="https://lh5.googleusercontent.com/bs5xc2qMdYl7u1hN7NpMae4SCns8jQ0bCHN8bjgqWDCcpltw7hnKllnae4ZVapy248x1t0qQJrimR1dMEFhlHSVUA-kdSDER4CThsqOAJsshmbWIvkg-CL4vcCpvwPR6VqPExT5E">
-<meta property="og:image" content="https://lh6.googleusercontent.com/qvzqNccKcVP1rkIZrhcTbS4t8e2vMGlFixh9lwNIKFjI40mRsGCjw31V5xxCTUnQ0wyrmiG592dyW3L1IdcVYxIQ-Txr94G6EjEb12HkhC-rZgM4BwD-iAWOfbwOitJgoWL6m-ea">
-<meta property="og:image" content="https://lh4.googleusercontent.com/rfmnoIfP4-vJ_I-yb1Jonbb3L1DZ4OLLuf6HwyUgXFHzgdK8h_Ius1rQImaJaEKZ-WXjfIAsfWKr-ilxDK_hyWCIVqXchLWuECCbN66GnEBBgfu7WhrIXskE0a1rAyL-YYa96U7V">
-<meta property="og:image" content="https://lh4.googleusercontent.com/oMxXGW0sLYjQWMYUfqFMUiArb_JaJGhuwRwJkNU9fARY3zJrJ9dm-5YaCbBO7LeiNVj6ECM1iLiFFC_tWj2QE_LjqPLGKRYfnq0Y6_DhHLXXtqjzHJwD4cY74L8pVjnsOLXKU8r_">
-<meta property="og:image" content="https://lh3.googleusercontent.com/Gk_zGc0f8ACkM8ezaJygsd-i_NZ5Ah8r1Jj_NvL5tHUQ1LQSgJfQmnstNHn53Xs64aU2J4E3o_DcoHUerriseez78YDkCoI7ALbTZzIfXSb60d3RrV0DUn4AY3WXFa2OtJQpDhp9">
-<meta property="og:image" content="https://lh4.googleusercontent.com/kECd5Aw-Cr8ZllQaKX9wJf3TZTd5DmDArmBkFVpBbXtT9D4mGXgZlsSjSYH91oibOi9hv51jJ9XbjsMfcOZi8Zwrz_5pRs52ybKTRjAvCtDUk-RZGDFaRLNUMDd7YZLS6WXxmO0e">
-<meta property="og:updated_time" content="2016-08-02T14:34:47.000Z">
+<meta property="og:description" content="Wer spricht von Siegen？ Überstehn ist alles.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【译】Music Player:从UI方案到代码实现（Android）">
-<meta name="twitter:description" content="原文链接 : Music Player: From UI Proposal to Code（需科学上网）
-
-原文作者 : André Mion
-
-译者 :         Siegen
-
-
-（译者注：这是github最近很火的一个项目，目前star人数1800 。在原作者的帮助与支持之下，完成了这篇译文，希望对大家能有所帮助。）
-一些开发者在遇到稍显复杂的UI方案时,会觉得很难编码实现。他们中的">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/703392-be9a7bc46faa3417.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Siegen's blog">
+<meta name="twitter:description" content="Wer spricht von Siegen？ Überstehn ist alles.">
     
     
         
@@ -235,16 +201,21 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    <section class="postShorten-group main-content-wrap">
     
     
-        <div class="post-header main-content-wrap text-left">
-    
-        <h1 class="post-title" itemprop="headline">
-            【译】Music Player:从UI方案到代码实现（Android）
-        </h1>
-    
-    <div class="post-meta">
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2016/08/02/My-New-Post/">
+                            【译】Music Player:从UI方案到代码实现（Android）
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
     <time itemprop="datePublished" datetime="2016-08-02T18:14:03+08:00">
 	
 		    8月 02, 2016
@@ -253,11 +224,10 @@
     
 </div>
 
-</div>
-    
-    <div class="post-content markdown" itemprop="articleBody">
-        <div class="main-content-wrap">
-            <ul>
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <ul>
 <li><p>原文链接 : <a href="https://stories.uplabs.com/music-player-3a85864d6df7#.8cso9al4h" target="_blank" rel="external">Music Player: From UI Proposal to Code</a>（需科学上网）</p>
 </li>
 <li><p>原文作者 : <a href="https://stories.uplabs.com/@andremion" target="_blank" rel="external">André Mion</a></p>
@@ -412,78 +382,31 @@ android:interpolator=&quot;@android:interpolator/accelerate_quad&quot;&gt;
 <p><a href="https://blog.prototypr.io/applying-meaningful-motion-on-android-a271a873bd78" target="_blank" rel="external">Applying meaningful motion on Android</a></p>
 <p>玩的愉快 ;)</p>
 
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/08/02/My-New-Post/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
             
         </div>
-    </div>
-    <div id="post-footer" class="post-footer main-content-wrap">
         
-            <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
-                
-    <a class="tag tag--primary tag--small t-link" href="/tags/Android-more/">Android <!-- more --></a>
-
-            </div>
+    </article>
+    
+    <div class="pagination-bar">
+    <ul class="pagination">
         
-        <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--disabled">
-                
-                    <i class="fa fa-angle-left"></i>
-                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
-                </a>
-            </li>
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--disabled">
-                
-                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
-                <i class="fa fa-share-alt"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2016/08/02/My-New-Post/">
-                <i class="fa fa-google-plus"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/08/02/My-New-Post/">
-                <i class="fa fa-facebook-official"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2016/08/02/My-New-Post/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
         
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#">
-            
-                <i class="fa fa-list"></i>
-            </a>
-        </li>
+        <li class="pagination-number">第 1 页 共 1 页</li>
     </ul>
 </div>
 
-
-        
-            
-        
-    </div>
-</article>
-
+</section>
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -493,84 +416,6 @@ android:interpolator=&quot;@android:interpolator/accelerate_quad&quot;&gt;
 </footer>
 
             </div>
-            
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="2">
-                    <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--disabled">
-                
-                    <i class="fa fa-angle-left"></i>
-                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
-                </a>
-            </li>
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--disabled">
-                
-                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
-                <i class="fa fa-share-alt"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2016/08/02/My-New-Post/">
-                <i class="fa fa-google-plus"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/08/02/My-New-Post/">
-                <i class="fa fa-facebook-official"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2016/08/02/My-New-Post/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#">
-            
-                <i class="fa fa-list"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-                </div>
-                <div id="share-options-bar" class="share-options-bar" data-behavior="2">
-    <ul class="share-options">
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2016/08/02/My-New-Post/">
-                <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
-            </a>
-        </li>
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/08/02/My-New-Post/">
-                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
-            </a>
-        </li>
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2016/08/02/My-New-Post/">
-                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<div id="share-options-mask" class="share-options-mask"></div>
-
             
         </div>
         
@@ -660,8 +505,6 @@ android:interpolator=&quot;@android:interpolator/accelerate_quad&quot;&gt;
         <!--SCRIPTS-->
 <script src="/assets/js/script-rt08quwts7iav5x0cfd2ym0gb5qkd1lvrsmwrakxtkhefmaaes4ywkmnjnwf.min.js"></script>
 <!--SCRIPTS END-->
-
-    
 
 
 
